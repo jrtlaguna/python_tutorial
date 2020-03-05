@@ -1,4 +1,12 @@
 from datetime import datetime, timedelta
+from module import helper, dec_test
+from colorama import Style
+from dotenv import load_dotenv, find_dotenv
+import os
+import json
+import requests
+
+
 
 def using_print():
     print('Hello world')
@@ -77,6 +85,7 @@ def collections_and_loops():
     christopher = {}
     christopher['first'] = 'Christopher'
     christopher['last'] = 'Columbus'
+    
 
     people.append(susan)
     people.append(christopher)
@@ -88,9 +97,32 @@ def collections_and_loops():
 
 def parameterized(name='John'):
 
-
+    
     print(name)
 
 
+@dec_test
+def api_call(address='https://api.spacexdata.com/v3/rockets/falcon1'):
 
-    
+    response = requests.get(url=address)
+    if response.status_code == 200:
+        # result = json.dumps(response.json(), sort_keys=True, indent=4)
+
+        result = response.json()
+
+        print(f'Rocket name is {result["rocket_name"]}')
+        # print(result['rocket_name'])
+
+    else:
+        print('cant reach address.')
+
+def env_test():
+
+    load_dotenv(find_dotenv())
+
+    print(os.getenv("SECRET_MESSAGE"))
+
+
+
+
+env_test()
