@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog</title>
+</head>
+<body>
+    
+    <h2>This is list view</h2>
+
+    <form action="{% url 'home' %}" method="GET">
+        <input type="text" name='q' placeholder="Search...">
+    </form>
+
+    <table>
+        <th>
+            <tr>
+                <td>Title</td>
+                <td>Description</td>
+                <td>Action</td>
+            </tr>
+        </th>
+        
+        {% for post in posts %}
+            <tr>
+                <td>{{post.title}}</td>
+                <td>{{post.content}}</td>
+                <td>
+                    <a href="{% url 'update' post.id %}" class="btn">Update</a>
+                    <a href="{% url 'delete' post.id %}" class="btn">Delete</a>
+                </td>
+            </tr>
+        {% endfor %}
+            
+    </table>
+
+</body>
+</html>
